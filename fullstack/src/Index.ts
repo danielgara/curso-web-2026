@@ -11,6 +11,7 @@ class Index {
     app.set('view engine', 'ejs');
     app.set('views', path.join(process.cwd(), 'src/views'));
 
+    app.use(express.static('src/public'));
     app.use(Routes.initializeRoutes());
     
     app.listen(PORT, () => {

@@ -5,7 +5,9 @@
   "main": "src/Index.js",
   "scripts": {
     "dev": "tsx watch src/Index.ts",
-    "build": "tsc",
+    "dev:css": "npx @tailwindcss/cli -i ./src/assets/css/input.css -o ./src/public/css/style.css --watch",
+    "build": "npm run build:css && tsc",
+    "build:css": "npx @tailwindcss/cli -i ./src/assets/css/input.css -o ./src/public/css/style.css --minify",
     "start": "node dist/Index.js"
   },
   "keywords": [],
@@ -17,8 +19,11 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.3",
+    "autoprefixer": "^10.4.23",
+    "tailwindcss": "^4.1.18",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
