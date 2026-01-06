@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    /* lenguaje */
+    "target": "ES2020",
+
+    /* módulos */
+    "module": "ESNext",
+    "moduleResolution": "Node",
+
+    /* estructura del proyecto */
+    "rootDir": "src",
+    "outDir": "dist",
+
+    /* interoperabilidad */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* calidad de código */
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* desarrollo */
+    "sourceMap": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
