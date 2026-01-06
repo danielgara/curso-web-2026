@@ -2,10 +2,16 @@ import type { Request, Response } from 'express';
 
 export class HomeController {
   static index(req: Request, res: Response): void {
-    res.render('home/index');
+    const viewData: { [key: string]: any } = {};
+    viewData["title"] = "Home";
+
+    res.render('home/index', { viewData: viewData });
   }
 
   static about(req: Request, res: Response): void {
-    res.render('home/about');
+    const viewData: { [key: string]: any } = {};
+    viewData["title"] = "About";
+
+    res.render('home/about', { viewData: viewData });
   }
 }
