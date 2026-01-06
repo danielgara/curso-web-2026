@@ -2,7 +2,7 @@ import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
 import path from 'path';
 import type { Application } from 'express';
-import Routes from './routes/Routes.js';
+import Routes from './routes/Routes';
 
 class Index {
   static startServer(): void {
