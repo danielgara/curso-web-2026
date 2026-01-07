@@ -45,7 +45,7 @@ import { RouterLink, RouterView } from 'vue-router';
           <div class="px-6 py-4 flex items-center justify-between">
             <div>
               <h1 class="text-2xl font-bold text-gray-800">
-                <%= viewData.title %>
+                {{ $route.meta.title }}
               </h1>
             </div>
             <div class="flex items-center space-x-4">
