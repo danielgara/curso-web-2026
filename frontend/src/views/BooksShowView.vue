@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { books } from '@/data/books';
+import { BookService } from '@/services/BookService';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const bookId = Number(route.params.id);
-const book = books.find((b) => b.id == bookId);
+const book = BookService.getBookById(bookId);
 </script>
 
 <template>
