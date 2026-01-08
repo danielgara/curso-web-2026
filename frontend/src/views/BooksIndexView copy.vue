@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { BookService } from '@/services/BookService';
 const books = BookService.getBooks();
-const filteredBooks = ref(books);
 
 const selectableCategories = BookService.getUniqueCategories();
 const selectedCategory = ref('');
 
-watch(selectedCategory, (newValue) => {
-  console.log('called');
-  if (!newValue) {
-    filteredBooks.value = books;
-  } else {
-    filteredBooks.value = books.filter((book) => book.category === newValue);
+const filteredBooks = computed(() => {
+  if (!selectedCategory.value) {
+    return books;
   }
+  return books.filter((book) => book.category === selectedCategory.value);
 });
 </script>
 

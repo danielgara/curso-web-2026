@@ -18,4 +18,9 @@ export class BookService {
   static createBook(book: BookInterface): void {
     useAppStore().books.push(book);
   }
+
+  static getUniqueCategories(): string[] {
+    const uniqueCategories = [...new Set(useAppStore().books.map((book) => book.category))];
+    return uniqueCategories.sort();
+  }
 }
