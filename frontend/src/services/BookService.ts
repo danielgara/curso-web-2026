@@ -1,21 +1,21 @@
-import { books } from '@/data/books';
 import type { BookInterface } from '@/interfaces/BookInterface';
+import { useAppStore } from '@/store/appstore';
 
 export class BookService {
   static getBooks(): BookInterface[] {
-    return books;
+    return useAppStore().books;
   }
 
   static getBookById(id: number): BookInterface | undefined {
-    return books.find((book) => book.id === id);
+    return useAppStore().books.find((book) => book.id === id);
   }
 
   static getNextId(): number {
-    const lastBook = books[books.length - 1];
+    const lastBook = useAppStore().books[useAppStore().books.length - 1];
     return lastBook ? lastBook.id + 1 : 1;
   }
 
   static createBook(book: BookInterface): void {
-    books.push(book);
+    useAppStore().books.push(book);
   }
 }
