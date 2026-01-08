@@ -35,6 +35,14 @@ import { RouterLink, RouterView } from 'vue-router';
               <i class="fas fa-book mr-3"></i>
               <span>Books</span>
             </RouterLink>
+
+            <RouterLink
+              to="/playground"
+              class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-700 transition duration-200"
+            >
+              <i class="fas fa-play mr-3"></i>
+              <span>Playground</span>
+            </RouterLink>
           </nav>
         </div>
 
