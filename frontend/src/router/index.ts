@@ -12,9 +12,19 @@ const router = createRouter({
     { path: '/', name: 'home', component: HomeView, meta: { title: 'Home' } },
     { path: '/about', name: 'about', component: AboutView, meta: { title: 'About' } },
     { path: '/books', name: 'books.index', component: BooksIndexView, meta: { title: 'Books' } },
-    { path: '/books/create', name: 'books.create', component: BooksCreateView, meta: { title: 'Create Book' } },
+    {
+      path: '/books/create',
+      name: 'books.create',
+      component: BooksCreateView,
+      meta: { title: 'Create Book' },
+    },
     { path: '/books/:id', name: 'books.show', component: BooksShowView, meta: { title: 'Book' } },
-    { path: '/playground', name: 'playground', component: PlaygroundView, meta: { title: 'Playground' } },
+    {
+      path: '/playground',
+      name: 'playground',
+      component: PlaygroundView,
+      meta: { title: 'Playground' },
+    },
   ],
 });
 

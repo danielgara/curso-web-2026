@@ -14,7 +14,7 @@ function submitForm() {
     title: title.value,
     category: category.value,
     price: price.value,
-    stock: stock.value
+    stock: stock.value,
   };
   BookService.createBook(newBook);
   successMessage.value = 'Book created successfully!';
@@ -28,46 +28,68 @@ function submitForm() {
 <template>
   <section class="max-w-2xl mx-auto py-8">
     <h2 class="text-2xl font-bold text-gray-800 mb-8">Create a New Book</h2>
-    <form
-      class="bg-white rounded-lg shadow-md p-8 space-y-6"
-      @submit.prevent="submitForm"
-    >
+    <form class="bg-white rounded-lg shadow-md p-8 space-y-6" @submit.prevent="submitForm">
       <div>
         <label class="block text-gray-700 font-semibold mb-2" for="title">Title</label>
-        <input v-model="title" type="text" id="title"
+        <input
+          v-model="title"
+          type="text"
+          id="title"
           class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
-          required placeholder="Book Title" />
+          required
+          placeholder="Book Title"
+        />
       </div>
 
       <div>
         <label class="block text-gray-700 font-semibold mb-2" for="category">Category</label>
-        <input v-model="category" type="text" id="category"
+        <input
+          v-model="category"
+          type="text"
+          id="category"
           class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
-          required placeholder="Category" />
+          required
+          placeholder="Category"
+        />
       </div>
 
       <div>
         <label class="block text-gray-700 font-semibold mb-2" for="price">Price</label>
-        <input v-model.number="price" type="number" min="0" step="0.01" id="price"
+        <input
+          v-model.number="price"
+          type="number"
+          min="0"
+          step="0.01"
+          id="price"
           class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
-          required placeholder="0.00" />
+          required
+          placeholder="0.00"
+        />
       </div>
 
       <div>
         <label class="block text-gray-700 font-semibold mb-2" for="stock">Stock</label>
-        <input v-model.number="stock" type="number" min="0" id="stock"
+        <input
+          v-model.number="stock"
+          type="number"
+          min="0"
+          id="stock"
           class="w-full border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring focus:border-blue-300"
-          required placeholder="0" />
+          required
+          placeholder="0"
+        />
       </div>
 
       <div class="pt-4">
-        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded hover:bg-blue-700 transition">
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white font-semibold py-3 rounded hover:bg-blue-700 transition"
+        >
           Create Book
         </button>
       </div>
 
       <p v-if="successMessage" class="text-green-600 mt-4">{{ successMessage }}</p>
-
     </form>
   </section>
 </template>
