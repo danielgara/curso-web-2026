@@ -1,24 +1,24 @@
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { BooksService } from './books.service';
+import { Book } from './entities/book.entity';
 import { CreateBookDto } from './dto/create-book.dto';
-import type { Book } from './interfaces/book.interface';
 
 @Controller('books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
 
   @Get()
-  findAll(): Book[] {
+  findAll(): Promise<Book[]> {
     return this.booksService.findAll();
   }
 
   @Get('categories')
-  getUniqueCategories(): string[] {
+  getUniqueCategories(): Promise<string[]> {
     return this.booksService.getUniqueCategories();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Book | undefined {
+  findOne(@Param('id') id: string): Promise<Book | null> {
     return this.booksService.findOne(Number(id));
   }
 

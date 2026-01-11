@@ -1,31 +1,32 @@
 import { Injectable } from '@nestjs/common';
-import { Book } from './interfaces/book.interface';
-import { CreateBook } from './interfaces/create-book.interface';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Book } from './entities/book.entity';
+import { CreateBookDto } from './dto/create-book.dto';
 
 @Injectable()
 export class BooksService {
-  private readonly books: Book[] = [
-    { id: 1, title: 'The Great Gatsby', category: 'Fiction', price: 10.99, stock: 10 },
-    { id: 2, title: 'Clean Code', category: 'Programming', price: 20.99, stock: 20 },
-    { id: 3, title: 'Sapiens', category: 'History', price: 30.99, stock: 30 },
-  ];
+  constructor(
+    @InjectRepository(Book)
+    private booksRepository: Repository<Book>,
+  ) {}
 
-  findAll(): Book[] {
-    return this.books;
+  findAll(): Promise<Book[]> {
+    return this.booksRepository.find();
   }
 
-  findOne(id: number): Book | undefined {
-    return this.books.find((book) => book.id === id);
+  findOne(id: number): Promise<Book | null> {
+    return this.booksRepository.findOne({ where: { id } });
   }
 
-  create(book: CreateBook): void {
-    this.books.push({
-      id: this.books.length + 1,
-      ...book,
-    });
+  create(createBookDto: CreateBookDto): void {
+    this.booksRepository.save(createBookDto);
   }
 
-  getUniqueCategories(): string[] {
-    return [...new Set(this.books.map((book) => book.category))].sort();
-  }
+  getUniqueCategories(): Promise<string[]> {
+    return this.booksRepository.createQueryBuilder('book')
+      .select('DISTINCT category')
+      .getRawMany()
+      .then(categories => categories.map(category => category.category));
+  } 
 }
