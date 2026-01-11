@@ -1,4 +1,5 @@
 import type { BookInterface } from '@/interfaces/BookInterface';
+import type { BookCreateInterface } from '@/interfaces/BookCreateInterface';
 import axios from 'axios';
 
 const apiURL = 'http://localhost:3000';
@@ -24,7 +25,7 @@ export class BookService {
     }
   }
 
-  static async createBook(book: BookInterface): Promise<void> {
+  static async createBook(book: BookCreateInterface): Promise<void> {
     try {
       await axios.post(`${apiURL}/books`, book);
     } catch (error) {

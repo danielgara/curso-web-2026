@@ -8,20 +8,14 @@ const price = ref(0);
 const stock = ref(0);
 const successMessage = ref('');
 
-function submitForm() {
-  const newBook = {
-    id: BookService.getNextId(),
+async function submitForm() {
+  await BookService.createBook({
     title: title.value,
     category: category.value,
     price: price.value,
     stock: stock.value,
-  };
-  BookService.createBook(newBook);
-  successMessage.value = 'Book created successfully!';
-  title.value = '';
-  category.value = '';
-  price.value = 0;
-  stock.value = 0;
+  });
+  successMessage.value = 'Book created successfully';
 }
 </script>
 

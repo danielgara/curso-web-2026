@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Book } from './interfaces/book.interface';
+import { CreateBook } from './interfaces/create-book.interface';
 
 @Injectable()
 export class BooksService {
@@ -17,8 +18,11 @@ export class BooksService {
     return this.books.find((book) => book.id === id);
   }
 
-  create(book: Book): void {
-    this.books.push(book);
+  create(book: CreateBook): void {
+    this.books.push({
+      id: this.books.length + 1,
+      ...book,
+    });
   }
 
   getUniqueCategories(): string[] {
