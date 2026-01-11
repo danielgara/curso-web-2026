@@ -20,4 +20,8 @@ export class BooksService {
   create(book: Book): void {
     this.books.push(book);
   }
+
+  getUniqueCategories(): string[] {
+    return [...new Set(this.books.map((book) => book.category))].sort();
+  }
 }

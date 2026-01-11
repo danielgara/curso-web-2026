@@ -1,26 +1,44 @@
 import type { BookInterface } from '@/interfaces/BookInterface';
-import { useAppStore } from '@/store/appstore';
+import axios from 'axios';
+
+const apiURL = 'http://localhost:3000';
 
 export class BookService {
-  static getBooks(): BookInterface[] {
-    return useAppStore().books;
+  static async getBooks(): Promise<BookInterface[]> {
+    try {
+      const response = await axios.get(`${apiURL}/books`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching books:', error);
+      return [];
+    }
   }
 
-  static getBookById(id: number): BookInterface | undefined {
-    return useAppStore().books.find((book) => book.id === id);
+  static async getBookById(id: number): Promise<BookInterface | undefined> {
+    try {
+      const response = await axios.get(`${apiURL}/books/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching book:', error);
+      return undefined;
+    }
   }
 
-  static getNextId(): number {
-    const lastBook = useAppStore().books[useAppStore().books.length - 1];
-    return lastBook ? lastBook.id + 1 : 1;
+  static async createBook(book: BookInterface): Promise<void> {
+    try {
+      await axios.post(`${apiURL}/books`, book);
+    } catch (error) {
+      console.error('Error creating book:', error);
+    }
   }
 
-  static createBook(book: BookInterface): void {
-    useAppStore().books.push(book);
-  }
-
-  static getUniqueCategories(): string[] {
-    const uniqueCategories = [...new Set(useAppStore().books.map((book) => book.category))];
-    return uniqueCategories.sort();
+  static async getUniqueCategories(): Promise<string[]> {
+    try {
+      const response = await axios.get(`${apiURL}/books/categories`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching unique categories:', error);
+      return [];
+    }
   }
 }

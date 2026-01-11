@@ -1,19 +1,26 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { BookService } from '@/services/BookService';
-const books = BookService.getBooks();
-const filteredBooks = ref(books);
+import type { BookInterface } from '@/interfaces/BookInterface';
 
-const selectableCategories = BookService.getUniqueCategories();
+const books = ref<BookInterface[]>([]);
+const filteredBooks = ref<BookInterface[]>([]);
+
+const selectableCategories = ref<string[]>([]);
 const selectedCategory = ref('');
 
 watch(selectedCategory, (newValue) => {
-  console.log('called');
   if (!newValue) {
-    filteredBooks.value = books;
+    filteredBooks.value = books.value;
   } else {
-    filteredBooks.value = books.filter((book) => book.category === newValue);
+    filteredBooks.value = books.value.filter((book: BookInterface) => book.category === newValue);
   }
+});
+
+onMounted(async () => {
+  books.value = await BookService.getBooks();
+  filteredBooks.value = books.value;
+  selectableCategories.value = await BookService.getUniqueCategories();
 });
 </script>
 

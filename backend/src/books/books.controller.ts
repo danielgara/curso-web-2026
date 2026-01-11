@@ -12,6 +12,11 @@ export class BooksController {
     return this.booksService.findAll();
   }
 
+  @Get('categories')
+  getUniqueCategories(): string[] {
+    return this.booksService.getUniqueCategories();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string): Book | undefined {
     return this.booksService.findOne(Number(id));
